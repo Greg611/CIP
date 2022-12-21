@@ -1,6 +1,7 @@
 package com.cip.moviedatabase.Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class User {
     protected Integer id;
@@ -8,6 +9,7 @@ public class User {
     protected String password;
     protected LocalDate dob;
     protected String email;
+    protected ArrayList<Collection> collections = new ArrayList<>();
 
     public User(Integer id, String name, String password, LocalDate dob, String email) {
         this.id = id;
@@ -61,5 +63,16 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ArrayList<Collection> getCollections() {
+        return collections;
+    }
+
+    public Boolean createCollection(String name){
+        Boolean result = false;
+        Collection newCollection = new Collection(1,name);
+        this.collections.add(newCollection);
+        return result;
     }
 }
