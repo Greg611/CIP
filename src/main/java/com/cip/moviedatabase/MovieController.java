@@ -23,7 +23,7 @@ public class MovieController {
     }
 
     @GetMapping
-    @RequestMapping("listCollections")
+    @RequestMapping("listCollection")
     public ArrayList<Collection> getCollection() {
         User user = new User(1,"asd","asd",LocalDate.now(),"asd");
         user.createCollection("asd");
