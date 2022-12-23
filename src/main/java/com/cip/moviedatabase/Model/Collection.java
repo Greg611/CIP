@@ -9,6 +9,10 @@ public class Collection {
         this.name = name;
     }
 
+    public Collection(String name) {
+        this.name = name;
+    }
+
     public Collection() {
     }
 

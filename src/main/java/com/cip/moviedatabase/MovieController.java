@@ -29,5 +29,4 @@ public class MovieController {
         user.createCollection("asd");
         return user.getCollections();
     }
-
 }
