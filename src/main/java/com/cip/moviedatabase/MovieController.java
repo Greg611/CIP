@@ -19,13 +19,13 @@ public class MovieController {
     @GetMapping
     @RequestMapping("list")
     public List<Movie> getMovie(){
-        return List.of(new Movie(0,"a",9.11f,120, LocalDate.now(),null,null, null));
+        return List.of(new Movie("a",9.11f,120, LocalDate.now(),null,null, null));
     }
 
     @GetMapping
     @RequestMapping("listCollections")
     public ArrayList<Collection> getCollection() {
-        User user = new User(1,"asd","asd",LocalDate.now(),"asd");
+        User user = new User("asd","asd",LocalDate.now(),"asd");
         user.createCollection("asd");
         return user.getCollections();
     }

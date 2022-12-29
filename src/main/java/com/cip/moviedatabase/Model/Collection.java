@@ -1,10 +1,12 @@
 package com.cip.moviedatabase.Model;
 
+import java.util.UUID;
+
 public class Collection {
-    private Integer id;
+    private UUID id;
     private String name;
 
-    public Collection(Integer id, String name) {
+    public Collection(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -16,7 +18,7 @@ public class Collection {
     public Collection() {
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 

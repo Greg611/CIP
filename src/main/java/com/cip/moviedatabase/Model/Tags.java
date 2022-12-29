@@ -1,10 +1,12 @@
 package com.cip.moviedatabase.Model;
 
+import java.util.UUID;
+
 public class Tags {
-    private Integer id;
+    private UUID id;
     private String name;
 
-    public Tags(Integer id, String name) {
+    public Tags(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -12,7 +14,7 @@ public class Tags {
     public Tags() {
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 

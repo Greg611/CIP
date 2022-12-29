@@ -2,16 +2,17 @@ package com.cip.moviedatabase.Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class User {
-    protected Integer id;
+    protected UUID id;
     protected String name;
     protected String password;
     protected LocalDate dob;
     protected String email;
     protected ArrayList<Collection> collections = new ArrayList<>();
 
-    public User(Integer id, String name, String password, LocalDate dob, String email) {
+    public User(UUID id, String name, String password, LocalDate dob, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -29,7 +30,7 @@ public class User {
         this.email = email;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -71,7 +72,7 @@ public class User {
 
     public Boolean createCollection(String name){
         Boolean result = false;
-        Collection newCollection = new Collection(1,name);
+        Collection newCollection = new Collection(name);
         this.collections.add(newCollection);
         return result;
     }

@@ -2,9 +2,10 @@ package com.cip.moviedatabase.Model;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.UUID;
 
 public class Movie {
-    private Integer id;
+    private UUID id;
     private String title;
     private Float imdb;
     private Integer duration;
@@ -13,7 +14,7 @@ public class Movie {
     private LinkedList<CastMember> cast;
     private LinkedList<Tags> tags;
 
-    public Movie(Integer id, String title, Float imdb, Integer duration, LocalDate release_date, LinkedList<CastMember> directors, LinkedList<CastMember> cast, LinkedList<Tags> tags) {
+    public Movie(UUID id, String title, Float imdb, Integer duration, LocalDate release_date, LinkedList<CastMember> directors, LinkedList<CastMember> cast, LinkedList<Tags> tags) {
         this.id = id;
         this.title = title;
         this.imdb = imdb;
@@ -37,7 +38,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 

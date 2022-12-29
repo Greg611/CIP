@@ -2,9 +2,10 @@ package com.cip.moviedatabase.Model;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.UUID;
 
 public class Admin extends User{
-    public Admin(Integer id, String name, String password, LocalDate dob, String email) {
+    public Admin(UUID id, String name, String password, LocalDate dob, String email) {
         super(id, name, password, dob, email);
     }
 
