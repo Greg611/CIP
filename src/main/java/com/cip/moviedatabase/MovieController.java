@@ -3,13 +3,12 @@ package com.cip.moviedatabase;
 import com.cip.moviedatabase.Model.Collection;
 import com.cip.moviedatabase.Model.Movie;
 import com.cip.moviedatabase.Model.User;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.*;
-
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class MovieController {
 
     @GetMapping
     @RequestMapping("listCollections")
-    public ArrayList<Collection> getCollection() {
+    public LinkedList<Collection> getCollection() {
         User user = new User("asd","asd",LocalDate.now(),"asd");
         user.createCollection("asd");
         return user.getCollections();

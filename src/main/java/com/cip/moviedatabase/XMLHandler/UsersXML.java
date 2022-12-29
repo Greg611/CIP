@@ -27,7 +27,6 @@ public class UsersXML {
     public static List<User> readAllUsers() {
         Document doc = XMLFileBuilder.usersFileBuilder();
         List<User> listOfUsers = new LinkedList<>();
-        User user = new User();
         NodeList userNodes = doc.getElementsByTagName("User");
         for (int i = 0; i < userNodes.getLength(); i++) {
             Node userNode = userNodes.item(i);
@@ -41,7 +40,7 @@ public class UsersXML {
                 LocalDate dob = LocalDate.parse(userElement.getElementsByTagName("DateOfBirth").item(0).getTextContent());
                 String email = userElement.getElementsByTagName("Email").item(0).getTextContent();
 
-                user = new User(id, name, password, dob, email);
+                User user = new User(id, name, password, dob, email);
                 listOfUsers.add(user);
             }
         }
@@ -52,9 +51,9 @@ public class UsersXML {
         Document doc = XMLFileBuilder.usersFileBuilder();
         User user = new User();
         NodeList userNodes = doc.getElementsByTagName("User");
-        boolean found = false;
+
         int i = 0;
-        while (i < userNodes.getLength() || found) {
+        while (i < userNodes.getLength()) {
             Node userNode = userNodes.item(i);
 
             if (userNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -74,7 +73,7 @@ public class UsersXML {
         return user;
     }
 
-    public void saveUser(User newUser){
+    public static void saveUser(User newUser){
         try {
             File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -92,15 +91,15 @@ public class UsersXML {
             user.appendChild(name);
 
             Element password = doc.createElement("Password");
-            name.appendChild(doc.createTextNode(newUser.getPassword()));
+            password.appendChild(doc.createTextNode(newUser.getPassword()));
             user.appendChild(password);
 
             Element dob = doc.createElement("DateOfBirth");
-            name.appendChild(doc.createTextNode(newUser.getDob().toString()));
+            dob.appendChild(doc.createTextNode(newUser.getDob().toString()));
             user.appendChild(dob);
 
             Element email = doc.createElement("Email");
-            name.appendChild(doc.createTextNode(newUser.getEmail()));
+            email.appendChild(doc.createTextNode(newUser.getEmail()));
             user.appendChild(email);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -114,11 +113,77 @@ public class UsersXML {
         }
     }
 
-    public void modifyUser(){
-        //WIP
+    public static void modifyUser(User modifiedUser){
+        try {
+            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+
+            int i = 0;
+            NodeList userNodes = doc.getElementsByTagName("User");
+
+            while (i < userNodes.getLength()) {
+                Node userNode = userNodes.item(i);
+
+                if (userNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element userElement = (Element) userNode;
+
+                    UUID id = UUID.fromString(userElement.getElementsByTagName("Id").item(0).getTextContent());
+                    if (id.equals(modifiedUser.getId())) {
+                        userElement.getElementsByTagName("Name").item(0).setTextContent(modifiedUser.getName());
+                        userElement.getElementsByTagName("Password").item(0).setTextContent(modifiedUser.getPassword());
+                        userElement.getElementsByTagName("DateOfBirth").item(0).setTextContent(modifiedUser.getDob().toString());
+                        userElement.getElementsByTagName("Email").item(0).setTextContent(modifiedUser.getEmail());
+                    }
+                }
+                i++;
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(doc);
+            StreamResult streamResult = new StreamResult(file);
+            transformer.transform(domSource, streamResult);
+        } catch (SAXException | TransformerException | IOException | ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void deleteUser(){
-        //WIP
+    public static void deleteUser(User deletedUser){
+        try{
+            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+            NodeList userNodes = doc.getElementsByTagName("User");
+
+            //WIP
+            //ha megvan a readCollection és a deleteCollection funkció, akkor visszatérni
+
+            int j=0;
+
+            while (j < userNodes.getLength()) {
+                Node userNode = userNodes.item(j);
+
+                if (userNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element userElement = (Element) userNode;
+
+                    UUID id = UUID.fromString(userElement.getElementsByTagName("Id").item(0).getTextContent());
+                    if (id.equals(deletedUser.getId())) {
+                        userElement.getParentNode().removeChild(userElement);
+                    }
+                }
+                j++;
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(doc);
+            StreamResult streamResult = new StreamResult(file);
+            transformer.transform(domSource, streamResult);
+        } catch (SAXException | TransformerException | IOException | ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -9,27 +9,27 @@ public class Movie {
     private String title;
     private Float imdb;
     private Integer duration;
-    private LocalDate release_date;
+    private LocalDate releaseDate;
     private LinkedList<CastMember> directors;
     private LinkedList<CastMember> cast;
     private LinkedList<Tags> tags;
 
-    public Movie(UUID id, String title, Float imdb, Integer duration, LocalDate release_date, LinkedList<CastMember> directors, LinkedList<CastMember> cast, LinkedList<Tags> tags) {
+    public Movie(UUID id, String title, Float imdb, Integer duration, LocalDate releaseDate, LinkedList<CastMember> directors, LinkedList<CastMember> cast, LinkedList<Tags> tags) {
         this.id = id;
         this.title = title;
         this.imdb = imdb;
         this.duration = duration;
-        this.release_date = release_date;
+        this.releaseDate = releaseDate;
         this.directors = directors;
         this.cast = cast;
         this.tags = tags;
     }
 
-    public Movie(String title, Float imdb, Integer duration, LocalDate release_date, LinkedList<CastMember> directors, LinkedList<CastMember> cast, LinkedList<Tags> tags) {
+    public Movie(String title, Float imdb, Integer duration, LocalDate releaseDate, LinkedList<CastMember> directors, LinkedList<CastMember> cast, LinkedList<Tags> tags) {
         this.title = title;
         this.imdb = imdb;
         this.duration = duration;
-        this.release_date = release_date;
+        this.releaseDate = releaseDate;
         this.directors = directors;
         this.cast = cast;
         this.tags = tags;
@@ -66,12 +66,12 @@ public class Movie {
         this.duration = duration;
     }
 
-    public LocalDate getRelease_date() {
-        return release_date;
+    public LocalDate getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelease_date(LocalDate release_date) {
-        this.release_date = release_date;
+    public void setReleaseDate(LocalDate release_date) {
+        this.releaseDate = release_date;
     }
 
     public LinkedList<CastMember> getDirectors() {

@@ -39,9 +39,9 @@ public class XMLFileBuilder {
         return null;
     }
 
-    public static Document castFileBuilder(){
+    public static Document castMemberFileBuilder(){
         try {
-            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/CastData.xml");
+            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/CastMemberData.xml");
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(file);

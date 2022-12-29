@@ -1,7 +1,7 @@
 package com.cip.moviedatabase.Model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.UUID;
 
 public class User {
@@ -10,7 +10,7 @@ public class User {
     protected String password;
     protected LocalDate dob;
     protected String email;
-    protected ArrayList<Collection> collections = new ArrayList<>();
+    protected LinkedList<Collection> collections = new LinkedList<>();
 
     public User(UUID id, String name, String password, LocalDate dob, String email) {
         this.id = id;
@@ -66,7 +66,7 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Collection> getCollections() {
+    public LinkedList<Collection> getCollections() {
         return collections;
     }
 
