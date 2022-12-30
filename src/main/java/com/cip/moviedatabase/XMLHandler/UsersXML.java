@@ -158,8 +158,9 @@ public class UsersXML {
             Document doc = builder.parse(file);
             NodeList userNodes = doc.getElementsByTagName("User");
 
-            //WIP
-            //ha megvan a readCollection és a deleteCollection funkció, akkor visszatérni
+            for (int i = 0; i < deletedUser.getCollections().size(); i++) {
+                CollectionsXML.deleteCollection(deletedUser.getCollections().get(i));
+            }
 
             int j=0;
 

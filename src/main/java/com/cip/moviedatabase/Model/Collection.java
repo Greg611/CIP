@@ -7,8 +7,16 @@ public class Collection {
     private UUID id;
 
     private String name;
+    private UUID userId;
 
     private LinkedList<Movie> movies;
+
+    public Collection(UUID id, String name, UUID userId, LinkedList<Movie> movies) {
+        this.id = id;
+        this.name = name;
+        this.userId = userId;
+        this.movies = movies;
+    }
 
     public Collection(UUID id, String name, LinkedList<Movie> movies) {
         this.id = id;
@@ -21,8 +29,9 @@ public class Collection {
         this.movies = movies;
     }
 
-    public Collection(String name) {
+    public Collection(String name, UUID userId) {
         this.name = name;
+        this.userId = userId;
     }
 
     public Collection() {
@@ -46,5 +55,9 @@ public class Collection {
 
     public void setMovies(LinkedList<Movie> movies) {
         this.movies = movies;
+    }
+
+    public UUID getUserId() {
+        return userId;
     }
 }

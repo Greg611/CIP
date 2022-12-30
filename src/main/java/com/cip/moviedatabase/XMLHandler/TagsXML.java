@@ -47,9 +47,8 @@ public class TagsXML {
         Document doc = XMLFileBuilder.tagsFileBuilder();
         Tags tag = new Tags();
         NodeList tagsNodes = doc.getElementsByTagName("Tag");
-        boolean found = false;
         int i = 0;
-        while (i < tagsNodes.getLength() || found) {
+        while (i < tagsNodes.getLength()) {
             Node tagsNode = tagsNodes.item(i);
 
             if (tagsNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -66,7 +65,7 @@ public class TagsXML {
         return tag;
     }
 
-    public static void saveUser(Tags newTag){
+    public static void saveTag(Tags newTag){
         try {
             File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/TagsData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -128,17 +127,23 @@ public class TagsXML {
         }
     }
 
-    public static void deleteUser(User deletedUser){
+    public static void deleteTag(Tags deletedTag){
         try{
             File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/TagsData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
 
-            NodeList tagNodes = doc.getElementsByTagName("User");
+            NodeList tagNodes = doc.getElementsByTagName("Tag");
 
-            //WIP
-            //ha megvan a readMovie és a modifyMovie funkció, akkor visszatérni
+            for (int i = 0; i < MoviesXML.readAllMovies().size(); i++) {
+                for (int j = 0; j < MoviesXML.readAllMovies().get(i).getTags().size(); j++) {
+                    if (MoviesXML.readAllMovies().get(i).getTags().get(i).equals(deletedTag)){
+                        MoviesXML.readAllMovies().get(i).getTags().remove(deletedTag);
+                        MoviesXML.modifyMovie(MoviesXML.readAllMovies().get(i));
+                    }
+                }
+            }
 
             int j=0;
 
@@ -149,7 +154,7 @@ public class TagsXML {
                     Element tagElement = (Element) tagNode;
 
                     UUID id = UUID.fromString(tagElement.getElementsByTagName("Id").item(0).getTextContent());
-                    if (id.equals(deletedUser.getId())) {
+                    if (id.equals(deletedTag.getId())) {
                         tagElement.getParentNode().removeChild(tagElement);
                     }
                 }

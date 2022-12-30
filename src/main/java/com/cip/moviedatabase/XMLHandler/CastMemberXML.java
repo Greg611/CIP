@@ -49,9 +49,8 @@ public class CastMemberXML {
         Document doc = XMLFileBuilder.castMemberFileBuilder();
         CastMember castMember = new CastMember();
         NodeList castMemberNodes = doc.getElementsByTagName("CastMember");
-        boolean found = false;
         int i = 0;
-        while (i < castMemberNodes.getLength() || found) {
+        while (i < castMemberNodes.getLength()) {
             Node castMemberNode = castMemberNodes.item(i);
 
             if (castMemberNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -150,9 +149,22 @@ public class CastMemberXML {
 
             NodeList castMemberNodes = doc.getElementsByTagName("CastMember");
 
-            //WIP
-            //ha megvan a readMovie és a modifyMovie, akkor visszatérni
+            for (int i = 0; i < MoviesXML.readAllMovies().size(); i++) {
 
+                for (int j = 0; j < MoviesXML.readAllMovies().get(i).getDirectors().size(); j++) {
+                    MoviesXML.readAllMovies().get(i).getDirectors().get(j);
+                    if (MoviesXML.readAllMovies().get(i).getDirectors().get(j).equals(deletedCastMember)){
+                        MoviesXML.readAllMovies().get(i).getDirectors().remove(deletedCastMember);
+                    }
+                }
+                for (int j = 0; j < MoviesXML.readAllMovies().get(i).getCast().size(); j++) {
+                    MoviesXML.readAllMovies().get(i).getCast().get(j);
+                    if (MoviesXML.readAllMovies().get(i).getCast().get(j).equals(deletedCastMember)){
+                        MoviesXML.readAllMovies().get(i).getCast().remove(deletedCastMember);
+                    }
+                }
+                MoviesXML.modifyMovie(MoviesXML.readAllMovies().get(i));
+            }
             int j=0;
 
             while (j < castMemberNodes.getLength()) {

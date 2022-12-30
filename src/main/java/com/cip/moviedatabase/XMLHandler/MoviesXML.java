@@ -41,16 +41,16 @@ public class MoviesXML {
                 Integer duration = Integer.parseInt(movieElement.getElementsByTagName("Duration").item(0).getTextContent());
                 LocalDate releaseDate = LocalDate.parse(movieElement.getElementsByTagName("releaseDate").item(0).getTextContent());
                 LinkedList<CastMember> director = new LinkedList<>();
-                for (int j= 0; i<movieElement.getElementsByTagName("Director").getLength();i++){
-                    director.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Director").item(i).getTextContent())));
+                for (int j= 0; j<movieElement.getElementsByTagName("Director").getLength();j++){
+                    director.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Director").item(j).getTextContent())));
                 }
                 LinkedList<CastMember> cast = new LinkedList<>();
-                for (int j= 0; i<movieElement.getElementsByTagName("Cast").getLength();i++){
-                    cast.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Cast").item(i).getTextContent())));
+                for (int j= 0; j<movieElement.getElementsByTagName("Cast").getLength();j++){
+                    cast.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Cast").item(j).getTextContent())));
                 }
                 LinkedList<Tags> tags = new LinkedList<>();
-                for (int j= 0; i<movieElement.getElementsByTagName("Tags").getLength();i++){
-                    tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tags").item(i).getTextContent())));
+                for (int j= 0; j<movieElement.getElementsByTagName("Tags").getLength();j++){
+                    tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tags").item(j).getTextContent())));
                 }
 
                 Movie movie = new Movie(id,title,imdb,duration,releaseDate,director,cast,tags);
@@ -79,16 +79,16 @@ public class MoviesXML {
                     Integer duration = Integer.parseInt(movieElement.getElementsByTagName("Duration").item(0).getTextContent());
                     LocalDate releaseDate = LocalDate.parse(movieElement.getElementsByTagName("releaseDate").item(0).getTextContent());
                     LinkedList<CastMember> director = new LinkedList<>();
-                    for (int j= 0; i<movieElement.getElementsByTagName("Director").getLength();i++){
-                        director.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Director").item(i).getTextContent())));
+                    for (int j= 0; j<movieElement.getElementsByTagName("Director").getLength();j++){
+                        director.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Director").item(j).getTextContent())));
                     }
                     LinkedList<CastMember> cast = new LinkedList<>();
-                    for (int j= 0; i<movieElement.getElementsByTagName("Cast").getLength();i++){
-                        cast.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Cast").item(i).getTextContent())));
+                    for (int j= 0; j<movieElement.getElementsByTagName("Cast").getLength();j++){
+                        cast.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Cast").item(j).getTextContent())));
                     }
                     LinkedList<Tags> tags = new LinkedList<>();
-                    for (int j= 0; i<movieElement.getElementsByTagName("Tags").getLength();i++){
-                        tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tags").item(i).getTextContent())));
+                    for (int j= 0; j<movieElement.getElementsByTagName("Tags").getLength();j++){
+                        tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tags").item(j).getTextContent())));
                     }
 
                     movie = new Movie(id,title,imdb,duration,releaseDate,director,cast,tags);
@@ -132,16 +132,19 @@ public class MoviesXML {
             for (int i=0; i<newMovie.getDirectors().size();i++){
                 directors.appendChild(doc.createTextNode(newMovie.getDirectors().get(i).getId().toString()));
             }
+            movie.appendChild(directors);
 
             Element cast = doc.createElement("Cast");
             for (int i=0; i < newMovie.getCast().size();i++){
                 cast.appendChild(doc.createTextNode(newMovie.getCast().get(i).getId().toString()));
             }
+            movie.appendChild(cast);
 
             Element tags = doc.createElement("Tag");
             for (int i=0; i < newMovie.getTags().size();i++){
                 cast.appendChild(doc.createTextNode(newMovie.getTags().get(i).getId().toString()));
             }
+            movie.appendChild(tags);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -156,7 +159,7 @@ public class MoviesXML {
 
     public static void modifyMovie(Movie modifiedMovie){
         try {
-            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
+            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/MoviesData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
@@ -176,9 +179,9 @@ public class MoviesXML {
                         movieElement.getElementsByTagName("IMDB").item(0).setTextContent(modifiedMovie.getImdb().toString());
                         movieElement.getElementsByTagName("Duration").item(0).setTextContent(modifiedMovie.getDuration().toString());
                         movieElement.getElementsByTagName("ReleaseDate").item(0).setTextContent(modifiedMovie.getReleaseDate().toString());
-                        movieElement.getElementsByTagName("Director").item(0).setTextContent(null);
-                        movieElement.getElementsByTagName("Cast").item(0).setTextContent(null);
-                        movieElement.getElementsByTagName("Tag").item(0).setTextContent(null);
+                        movieElement.getElementsByTagName("Director").item(0).setTextContent("");
+                        movieElement.getElementsByTagName("Cast").item(0).setTextContent("");
+                        movieElement.getElementsByTagName("Tag").item(0).setTextContent("");
                         for (int j=0; j<modifiedMovie.getDirectors().size();j++){
                             movieElement.getElementsByTagName("Director").item(0).appendChild(doc.createTextNode(modifiedMovie.getDirectors().get(i).getId().toString()));
                         }
@@ -205,14 +208,20 @@ public class MoviesXML {
 
     public static void deleteMovie(Movie deletedMovie){
         try{
-            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
+            File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/MoviesData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
             NodeList movieNodes = doc.getElementsByTagName("Movie");
 
-            //WIP
-            //ha megvan a readCollection és a modifyCollection funkció, akkor visszatérni
+            for (int i = 0; i < CollectionsXML.readAllCollection().size(); i++) {
+                for (int j = 0; j < CollectionsXML.readAllCollection().get(i).getMovies().size(); j++) {
+                    if (CollectionsXML.readAllCollection().get(i).getMovies().get(j).equals(deletedMovie)){
+                        CollectionsXML.readAllCollection().get(i).getMovies().remove(deletedMovie);
+                        CollectionsXML.modifyCollection(CollectionsXML.readAllCollection().get(i));
+                    }
+                }
+            }
 
             int j=0;
 

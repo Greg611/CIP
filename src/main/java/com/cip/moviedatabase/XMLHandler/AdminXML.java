@@ -156,10 +156,11 @@ public class AdminXML {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
-            NodeList adminNodes = doc.getElementsByTagName("User");
+            NodeList adminNodes = doc.getElementsByTagName("Admin");
 
-            //WIP
-            //ha megvan a readCollection és a deleteCollection funkció, akkor visszatérni
+            for (int i = 0; i < deletedAdmin.getCollections().size(); i++) {
+                CollectionsXML.deleteCollection(deletedAdmin.getCollections().get(i));
+            }
 
             int j=0;
 

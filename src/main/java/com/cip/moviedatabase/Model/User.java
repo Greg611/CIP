@@ -1,6 +1,9 @@
 package com.cip.moviedatabase.Model;
 
+import com.cip.moviedatabase.XMLHandler.CollectionsXML;
+
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.UUID;
 
@@ -70,10 +73,24 @@ public class User {
         return collections;
     }
 
-    public Boolean createCollection(String name){
-        Boolean result = false;
-        Collection newCollection = new Collection(name);
-        this.collections.add(newCollection);
-        return result;
+    public void userCreateCollection(String name){
+        Collection newCollection = new Collection(name, this.id);
+        CollectionsXML.saveCollection(newCollection);
+    }
+
+    public void userDeleteCollection(UUID collectionId){
+        CollectionsXML.deleteCollection(CollectionsXML.readCollection(collectionId, this.id));
+    }
+
+    public Boolean userAddMovieToCollection(UUID collectionId, UUID movieId){
+        int i=0;
+        while(i<CollectionsXML.readCollection(collectionId, this.id).getMovies().size()){
+            if (CollectionsXML.readCollection(collectionId, this.id).getMovies().get(i).getId().equals(movieId)){
+                return false;
+            }
+            i++;
+        }
+        //WIP
+        return true;
     }
 }
