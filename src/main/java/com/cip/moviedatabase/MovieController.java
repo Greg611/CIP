@@ -6,10 +6,7 @@ import com.cip.moviedatabase.Model.Movie;
 import com.cip.moviedatabase.Model.User;
 import com.cip.moviedatabase.XMLHandler.AdminXML;
 import com.cip.moviedatabase.XMLHandler.UsersXML;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -49,4 +46,9 @@ public class MovieController {
         return user.getCollections();
     }
 
+    @PostMapping
+    @RequestMapping("newUser")
+    public void postNewUser(@RequestBody User newUser){
+        UsersXML.saveUser(newUser);
+    }
 }
