@@ -1,4 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Collections>
-
+            
+    
+    
+    <Collection>
+                        
+        
+        <Id>bc96ab6f-921e-4e7f-8a85-09d0e8224fde</Id>
+                        
+        
+        <Name>asd</Name>
+                        
+        
+        <UserId>f7c0bc58-ad3e-4a84-bf38-120fa28f7f65</UserId>
+                    
+    
+    </Collection>
+        
+    
+    <Collection>
+                
+        <Id>353fb429-af35-492d-8cb4-916bc06967b4</Id>
+                
+        <Name>asd</Name>
+                
+        <UserId>f7c0bc58-ad3e-4a84-bf38-120fa28f7f65</UserId>
+            
+    </Collection>
+    
+    <Collection>
+        <Id>008986c7-3fbc-49a8-9eae-c8c24cb404da</Id>
+        <Name>asd</Name>
+        <UserId>f7c0bc58-ad3e-4a84-bf38-120fa28f7f65</UserId>
+    </Collection>
 </Collections>

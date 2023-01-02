@@ -2,6 +2,7 @@ package com.cip.moviedatabase.XMLHandler;
 
 import com.cip.moviedatabase.Model.Collection;
 import com.cip.moviedatabase.Model.Movie;
+import com.cip.moviedatabase.Model.User;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -11,6 +12,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -18,6 +20,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -110,6 +113,8 @@ public class CollectionsXML {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
 
+            Element root = doc.getDocumentElement();
+
             Element tag = doc.createElement("Collection");
 
             Element id = doc.createElement("Id");
@@ -124,10 +129,13 @@ public class CollectionsXML {
             userId.appendChild(doc.createTextNode(newCollection.getUserId().toString()));
             tag.appendChild(userId);
 
+            root.appendChild(tag);
+
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(doc);
             StreamResult streamResult = new StreamResult(file);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(domSource, streamResult);
 
         } catch (ParserConfigurationException | IOException | TransformerException | SAXException e) {

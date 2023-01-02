@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -80,6 +81,8 @@ public class AdminXML {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
 
+            Element root = doc.getDocumentElement();
+
             Element admin = doc.createElement("Admin");
 
             Element id = doc.createElement("Id");
@@ -102,10 +105,13 @@ public class AdminXML {
             email.appendChild(doc.createTextNode(newAdmin.getEmail()));
             admin.appendChild(email);
 
+            root.appendChild(admin);
+
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(doc);
             StreamResult streamResult = new StreamResult(file);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(domSource, streamResult);
 
         } catch (ParserConfigurationException | IOException | TransformerException | SAXException e) {

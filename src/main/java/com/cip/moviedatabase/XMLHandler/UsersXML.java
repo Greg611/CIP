@@ -10,6 +10,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -80,32 +81,44 @@ public class UsersXML {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
 
+
+
             Element user = doc.createElement("User");
 
             Element id = doc.createElement("Id");
             id.appendChild(doc.createTextNode(UUID.randomUUID().toString()));
             user.appendChild(id);
+            System.out.println("ID appended");
 
             Element name = doc.createElement("Name");
             name.appendChild(doc.createTextNode(newUser.getName()));
             user.appendChild(name);
+            System.out.println("Name appended");
 
             Element password = doc.createElement("Password");
             password.appendChild(doc.createTextNode(newUser.getPassword()));
             user.appendChild(password);
+            System.out.println("Pass appended");
 
             Element dob = doc.createElement("DateOfBirth");
             dob.appendChild(doc.createTextNode(newUser.getDob().toString()));
             user.appendChild(dob);
+            System.out.println("Dob appended");
 
             Element email = doc.createElement("Email");
             email.appendChild(doc.createTextNode(newUser.getEmail()));
             user.appendChild(email);
+            System.out.println("Email appended");
+
+            Element root = doc.getDocumentElement();
+
+            root.appendChild(user);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(doc);
             StreamResult streamResult = new StreamResult(file);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(domSource, streamResult);
 
         } catch (ParserConfigurationException | IOException | TransformerException | SAXException e) {
