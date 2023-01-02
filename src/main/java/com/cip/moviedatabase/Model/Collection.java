@@ -1,18 +1,43 @@
 package com.cip.moviedatabase.Model;
 
-public class Collection {
-    private Integer id;
-    private String name;
+import java.util.LinkedList;
+import java.util.UUID;
 
-    public Collection(Integer id, String name) {
+public class Collection {
+    private UUID id;
+
+    private String name;
+    private UUID userId;
+
+    private LinkedList<Movie> movies;
+
+    public Collection(UUID id, String name, UUID userId, LinkedList<Movie> movies) {
         this.id = id;
         this.name = name;
+        this.userId = userId;
+        this.movies = movies;
+    }
+
+    public Collection(UUID id, String name, LinkedList<Movie> movies) {
+        this.id = id;
+        this.name = name;
+        this.movies = movies;
+    }
+
+    public Collection(String name, LinkedList<Movie> movies) {
+        this.name = name;
+        this.movies = movies;
+    }
+
+    public Collection(String name, UUID userId) {
+        this.name = name;
+        this.userId = userId;
     }
 
     public Collection() {
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -22,5 +47,17 @@ public class Collection {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LinkedList<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(LinkedList<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public UUID getUserId() {
+        return userId;
     }
 }

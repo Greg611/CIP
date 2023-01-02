@@ -1,17 +1,21 @@
 package com.cip.moviedatabase.Model;
 
+import com.cip.moviedatabase.XMLHandler.CollectionsXML;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.UUID;
 
 public class User {
-    protected Integer id;
+    protected UUID id;
     protected String name;
     protected String password;
     protected LocalDate dob;
     protected String email;
-    protected ArrayList<Collection> collections = new ArrayList<>();
+    protected LinkedList<Collection> collections = new LinkedList<>();
 
-    public User(Integer id, String name, String password, LocalDate dob, String email) {
+    public User(UUID id, String name, String password, LocalDate dob, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -29,7 +33,7 @@ public class User {
         this.email = email;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -65,14 +69,28 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Collection> getCollections() {
+    public LinkedList<Collection> getCollections() {
         return collections;
     }
 
-    public Boolean createCollection(String name){
-        Boolean result = false;
-        Collection newCollection = new Collection(1,name);
-        this.collections.add(newCollection);
-        return result;
+    public void userCreateCollection(String name){
+        Collection newCollection = new Collection(name, this.id);
+        CollectionsXML.saveCollection(newCollection);
+    }
+
+    public void userDeleteCollection(UUID collectionId){
+        CollectionsXML.deleteCollection(CollectionsXML.readCollection(collectionId, this.id));
+    }
+
+    public Boolean userAddMovieToCollection(UUID collectionId, UUID movieId){
+        int i=0;
+        while(i<CollectionsXML.readCollection(collectionId, this.id).getMovies().size()){
+            if (CollectionsXML.readCollection(collectionId, this.id).getMovies().get(i).getId().equals(movieId)){
+                return false;
+            }
+            i++;
+        }
+        //WIP
+        return true;
     }
 }

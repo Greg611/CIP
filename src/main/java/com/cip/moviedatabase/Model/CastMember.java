@@ -1,9 +1,10 @@
 package com.cip.moviedatabase.Model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class CastMember {
-    private Integer id;
+    private UUID id;
     private String name;
     private String alias;
     private LocalDate dob;
@@ -11,7 +12,7 @@ public class CastMember {
     public CastMember() {
     }
 
-    public CastMember(Integer id, String name, String alias, LocalDate dob) {
+    public CastMember(UUID id, String name, String alias, LocalDate dob) {
         this.id = id;
         this.name = name;
         this.alias = alias;
@@ -24,7 +25,7 @@ public class CastMember {
         this.dob = dob;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
