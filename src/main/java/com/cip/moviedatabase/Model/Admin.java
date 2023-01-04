@@ -1,5 +1,7 @@
 package com.cip.moviedatabase.Model;
 
+import com.cip.moviedatabase.XMLHandler.AdminXML;
+import com.cip.moviedatabase.XMLHandler.MoviesXML;
 import com.cip.moviedatabase.XMLHandler.UsersXML;
 
 import java.time.LocalDate;
@@ -18,7 +20,39 @@ public class Admin extends User{
     public Admin() {
     }
 
-    public void createMovie(String title, Float imdb, Integer duration, LocalDate release_date, LinkedList<CastMember> directors, LinkedList<CastMember> cast, LinkedList<Tags> tags){
-        Movie newMovie = new Movie(title, imdb, duration, release_date, directors, cast, tags);
+    public void deleteUser(User deletedUser){
+        UsersXML.deleteUser(deletedUser);
+    }
+
+    public void modifyUser(User modifiedUser){
+        UsersXML.modifyUser(modifiedUser);
+    }
+
+    public LinkedList<User> getAllUsers(){
+        return UsersXML.readAllUsers();
+    }
+
+    public User getUser(UUID userId) {
+        return UsersXML.readUser(userId);
+    }
+
+    public void createAdmin(Admin newAdmin){
+        AdminXML.saveAdmin(newAdmin);
+    }
+
+    public void deleteAdmin(Admin deletedAdmin){
+        AdminXML.deleteAdmin(deletedAdmin);
+    }
+
+    public void modifyAdmin(Admin modifiedAdmin){
+        AdminXML.modifyAdmin(modifiedAdmin);
+    }
+
+    public void createMovie(Movie newMovie){
+        MoviesXML.saveMovie(newMovie);
+    }
+
+    public void deleteMovie(Movie deletedMovie){
+        MoviesXML.deleteMovie(deletedMovie);
     }
 }

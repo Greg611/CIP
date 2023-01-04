@@ -53,8 +53,8 @@ public class Collection {
         return movies;
     }
 
-    public void setMovies(LinkedList<Movie> movies) {
-        this.movies = movies;
+    public void addMovies(Movie movies) {
+        this.movies.add(movies);
     }
 
     public UUID getUserId() {

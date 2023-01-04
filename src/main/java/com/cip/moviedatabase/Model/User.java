@@ -1,6 +1,8 @@
 package com.cip.moviedatabase.Model;
 
 import com.cip.moviedatabase.XMLHandler.CollectionsXML;
+import com.cip.moviedatabase.XMLHandler.MoviesXML;
+import com.cip.moviedatabase.XMLHandler.UsersXML;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -73,6 +75,18 @@ public class User {
         return collections;
     }
 
+    public Movie readMovie(UUID id){
+        return MoviesXML.readMovie(id);
+    }
+
+    public LinkedList<Movie> readAllMovies(){
+        return MoviesXML.readAllMovies();
+    }
+
+    public User getMyAttributes(){
+        return UsersXML.readUser(this.id);
+    }
+
     public void userCreateCollection(String name){
         Collection newCollection = new Collection(name, this.id);
         CollectionsXML.saveCollection(newCollection);
@@ -84,13 +98,36 @@ public class User {
 
     public Boolean userAddMovieToCollection(UUID collectionId, UUID movieId){
         int i=0;
-        while(i<CollectionsXML.readCollection(collectionId, this.id).getMovies().size()){
-            if (CollectionsXML.readCollection(collectionId, this.id).getMovies().get(i).getId().equals(movieId)){
+        Collection collection = CollectionsXML.readCollection(collectionId, this.id);
+        while(i<collection.getMovies().size()){
+            if (collection.getMovies().get(i).getId().equals(movieId)){
                 return false;
             }
             i++;
         }
-        //WIP
+        collection.getMovies().add(MoviesXML.readMovie(movieId));
+        CollectionsXML.modifyCollection(collection);
+        return true;
+    }
+
+    public Boolean userDeleteMovieFromCollection(UUID collectionId, UUID movieId){
+        int i=0;
+        Collection collection = CollectionsXML.readCollection(collectionId, this.id);
+        while(i<collection.getMovies().size()){
+            if (collection.getMovies().get(i).getId().equals(movieId)){
+                return false;
+            }
+            i++;
+        }
+        collection.getMovies().remove(MoviesXML.readMovie(movieId));
+        CollectionsXML.modifyCollection(collection);
+        return true;
+    }
+
+    public Boolean userChangeCollectionName(UUID collectionId, String newName){
+        Collection collection = CollectionsXML.readCollection(collectionId, this.id);
+        collection.setName(newName);
+        CollectionsXML.modifyCollection(collection);
         return true;
     }
 }

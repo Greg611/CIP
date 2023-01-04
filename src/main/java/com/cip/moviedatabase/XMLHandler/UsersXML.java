@@ -25,9 +25,9 @@ import java.util.UUID;
 
 
 public class UsersXML {
-    public static List<User> readAllUsers() {
+    public static LinkedList<User> readAllUsers() {
         Document doc = XMLFileBuilder.usersFileBuilder();
-        List<User> listOfUsers = new LinkedList<>();
+        LinkedList<User> listOfUsers = new LinkedList<>();
         NodeList userNodes = doc.getElementsByTagName("User");
         for (int i = 0; i < userNodes.getLength(); i++) {
             Node userNode = userNodes.item(i);

@@ -5,6 +5,8 @@ import com.cip.moviedatabase.Model.Collection;
 import com.cip.moviedatabase.Model.Movie;
 import com.cip.moviedatabase.Model.User;
 import com.cip.moviedatabase.XMLHandler.AdminXML;
+import com.cip.moviedatabase.XMLHandler.CollectionsXML;
+import com.cip.moviedatabase.XMLHandler.MoviesXML;
 import com.cip.moviedatabase.XMLHandler.UsersXML;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,33 +19,43 @@ import java.util.UUID;
 @RequestMapping(path="api/movie")
 public class MovieController {
     @GetMapping
-    @RequestMapping("list")
-    public List<Movie> getMovie(){
-        return List.of(new Movie("a",9.11f,120, LocalDate.now(),null,null, null));
+    @RequestMapping("getMovie")
+    public Movie getMovie(@RequestBody String movieId){
+        return MoviesXML.readMovie(UUID.fromString(movieId));
     }
 
     @GetMapping
-    @RequestMapping("user")
-    public List<User> user(){
+    @RequestMapping("listAllMovies")
+    public List<Movie> getAllMovies(){
+        return MoviesXML.readAllMovies();
+    }
+
+
+
+    @GetMapping
+    @RequestMapping("listALlUsers")
+    public List<User> getAllUser(){
         return UsersXML.readAllUsers();
 
     }
 
     @GetMapping
-    @RequestMapping("newAdmin")
-    public void newAdmin(){
-        Admin admin =new Admin(UUID.randomUUID(),"asd","asd",LocalDate.now(),"asd");
-        AdminXML.saveAdmin(admin);
+    @RequestMapping("listCollections")
+    public LinkedList<Collection> getUsersCollection(@RequestBody String userId) {
+        return CollectionsXML.readUserAllCollection(UUID.fromString(userId));
     }
 
     @GetMapping
-    @RequestMapping("listCollections")
-    public LinkedList<Collection> getCollection() {
-        User user = new User(UUID.fromString("f7c0bc58-ad3e-4a84-bf38-120fa28f7f65"), "asd", "asd", LocalDate.now(), "asd");
-        System.out.println(UUID.randomUUID());
-        UsersXML.saveUser(user);
-        user.userCreateCollection("asd");
-        return user.getCollections();
+    @RequestMapping("getCollection")
+    public Collection getCollection(@RequestBody String userId, @RequestBody String collectionId){
+        return CollectionsXML.readCollection(UUID.fromString(collectionId), UUID.fromString(userId));
+    }
+
+    @PostMapping
+    @RequestMapping("newAdmin")
+    public void postNewAdmin(@RequestBody UUID adminId, @RequestBody Admin newAdmin){
+        Admin admin = AdminXML.readAdmin(adminId);
+        admin.createAdmin(newAdmin);
     }
 
     @PostMapping
@@ -51,4 +63,5 @@ public class MovieController {
     public void postNewUser(@RequestBody User newUser){
         UsersXML.saveUser(newUser);
     }
+
 }

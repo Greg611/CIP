@@ -78,7 +78,7 @@ public class Movie {
         return directors;
     }
 
-    public void setDirectors(CastMember director) {
+    public void addDirectors(CastMember director) {
         this.directors.add(director);
     }
 
@@ -86,7 +86,7 @@ public class Movie {
         return cast;
     }
 
-    public void setCast(CastMember cast) {
+    public void addCast(CastMember cast) {
         this.cast.add(cast);
     }
 
@@ -94,7 +94,7 @@ public class Movie {
         return tags;
     }
 
-    public void setTags(Tags tag) {
+    public void addTags(Tags tag) {
         this.tags.add(tag);
     }
 }

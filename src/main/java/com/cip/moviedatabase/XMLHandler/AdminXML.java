@@ -48,7 +48,7 @@ public class AdminXML {
         return listOfAdmin;
     }
 
-    public static User readAdmin(UUID searchedId) {
+    public static Admin readAdmin(UUID searchedId) {
         Document doc = XMLFileBuilder.usersFileBuilder();
         Admin admin = new Admin();
         NodeList adminNodes = doc.getElementsByTagName("Admin");
@@ -119,7 +119,7 @@ public class AdminXML {
         }
     }
 
-    public static void modifyAdmin(User modifiedAdmin){
+    public static void modifyAdmin(Admin modifiedAdmin){
         try {
             File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -156,7 +156,7 @@ public class AdminXML {
         }
     }
 
-    public static void deleteAdmin(User deletedAdmin){
+    public static void deleteAdmin(Admin deletedAdmin){
         try{
             File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

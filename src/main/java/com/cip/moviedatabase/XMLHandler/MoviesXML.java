@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class MoviesXML {
-    public static List<Movie> readAllMovies() {
+    public static LinkedList<Movie> readAllMovies() {
         Document doc = XMLFileBuilder.usersFileBuilder();
-        List<Movie> listOfMovies = new LinkedList<>();
+        LinkedList<Movie> listOfMovies = new LinkedList<>();
         NodeList movieNodes = doc.getElementsByTagName("Movie");
         for (int i = 0; i < movieNodes.getLength(); i++) {
             Node movieNode = movieNodes.item(i);
