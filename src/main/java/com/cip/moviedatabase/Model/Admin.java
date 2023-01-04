@@ -55,4 +55,6 @@ public class Admin extends User{
     public void deleteMovie(Movie deletedMovie){
         MoviesXML.deleteMovie(deletedMovie);
     }
+
+    public void modifyMovie(Movie modifiedMovie){ MoviesXML.modifyMovie(modifiedMovie); }
 }
