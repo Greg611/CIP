@@ -66,6 +66,10 @@ public class Admin extends User{
         return true;
     }
 
+    public LinkedList<Tags> adminReadAllTags(){
+        return TagsXML.readAllTags();
+    }
+
     public Boolean adminCreateTag(Tags newTag){
         TagsXML.saveTag(newTag);
         return true;
@@ -79,6 +83,10 @@ public class Admin extends User{
     public Boolean adminModifyTag(Tags modifiedTag){
         TagsXML.modifyTag(modifiedTag);
         return true;
+    }
+
+    public LinkedList<CastMember> adminReadAllCastMember(){
+        return CastMemberXML.readAllCastMembers();
     }
 
     public Boolean adminCreateCastMember(CastMember newCastMember){
@@ -95,4 +103,6 @@ public class Admin extends User{
         CastMemberXML.modifyCastMember(modifiedCastMember);
         return true;
     }
+
+
 }

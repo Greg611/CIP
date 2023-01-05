@@ -56,6 +56,20 @@ public class MovieController {
         return admin.adminGetUser(UUID.fromString(userId));
     }
 
+    @GetMapping
+    @RequestMapping("listTags")
+    public LinkedList<Tags> getTags(@RequestBody String adminId){
+        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
+        return admin.adminReadAllTags();
+    }
+
+    @GetMapping
+    @RequestMapping("listCastMember")
+    public LinkedList<CastMember> getCastMember(@RequestBody String adminId){
+        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
+        return admin.adminReadAllCastMember();
+    }
+
     @PostMapping
     @RequestMapping("newAdmin")
     public Boolean postNewAdmin(@RequestBody UUID adminId, @RequestBody Admin newAdmin){

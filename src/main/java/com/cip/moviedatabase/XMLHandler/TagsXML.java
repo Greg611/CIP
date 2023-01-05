@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class TagsXML {
-    public static List<Tags> readAllTags() {
+    public static LinkedList<Tags> readAllTags() {
         Document doc = XMLFileBuilder.tagsFileBuilder();
-        List<Tags> listOfTags = new LinkedList<>();
+        LinkedList<Tags> listOfTags = new LinkedList<>();
         NodeList tagsNodes = doc.getElementsByTagName("Tag");
         for (int i = 0; i < tagsNodes.getLength(); i++) {
             Node tagsNode = tagsNodes.item(i);

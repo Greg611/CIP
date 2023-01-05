@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class CastMemberXML {
-    public static List<CastMember> readAllCastMembers() {
+    public static LinkedList<CastMember> readAllCastMembers() {
         Document doc = XMLFileBuilder.castMemberFileBuilder();
-        List<CastMember> listOfCastMember = new LinkedList<>();
+        LinkedList<CastMember> listOfCastMember = new LinkedList<>();
         NodeList castMemberNodes = doc.getElementsByTagName("CastMember");
         for (int i = 0; i < castMemberNodes.getLength(); i++) {
             Node castMemberNode = castMemberNodes.item(i);
