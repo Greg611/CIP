@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Movies>
-
+    <Movie>
+        <Id>9c833b0d-b15d-42a4-90fe-6e74044e1223</Id>
+        <Title>asd</Title>
+        <IMDB>4.3</IMDB>
+        <Duration>190</Duration>
+        <ReleaseDate>2023-01-05</ReleaseDate>
+        <Director></Director>
+        <Cast></Cast>
+        <Tag></Tag>
+    </Movie>
 </Movies>

@@ -142,7 +142,7 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping("newCollection")
-    public Boolean postNewMovie(@RequestBody UUID userId, @RequestBody String newCollectionName){
+    public Boolean postNewCollection(@RequestBody UUID userId, @RequestBody String newCollectionName){
         User user = UsersXML.readUser(userId);
         return user.userCreateCollection(newCollectionName);
     }

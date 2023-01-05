@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CastMembers>
-
+    <CastMember>
+        <Id>68e19948-7e0d-47e1-bf85-ce51c3798fc5</Id>
+        <Name>ASD</Name>
+        <Alias>asd</Alias>
+        <DateOfBirth>2023-01-05</DateOfBirth>
+    </CastMember>
 </CastMembers>
