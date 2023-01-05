@@ -117,31 +117,13 @@
     
     
     
-    <Admin>
-                                
-        
-        
+    <User auth_level="Admin">
         <Id>396b1ecf-7372-4f5b-ba94-ba4dce9ad364</Id>
-                                
-        
-        
         <Name>asd</Name>
-                                
-        
-        
         <Password>asd</Password>
-                                
-        
-        
         <DateOfBirth>2023-01-02</DateOfBirth>
-                                
-        
-        
         <Email>asd</Email>
-                            
-    
-    
-    </Admin>
+    </User>
             
     
     

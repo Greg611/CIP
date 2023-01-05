@@ -32,6 +32,10 @@ public class Admin extends User{
         return UsersXML.readAllUsers();
     }
 
+    public LinkedList<Admin> adminGetAllAdmins(){
+        return AdminXML.readAllAdmin();
+    }
+
     public User adminGetUser(UUID userId) {
         return UsersXML.readUser(userId);
     }
@@ -42,12 +46,12 @@ public class Admin extends User{
     }
 
     public Boolean adminDeleteAdmin(Admin deletedAdmin){
-        AdminXML.deleteAdmin(deletedAdmin);
+        UsersXML.deleteUser(deletedAdmin);
         return true;
     }
 
     public Boolean adminModifyAdmin(Admin modifiedAdmin){
-        AdminXML.modifyAdmin(modifiedAdmin);
+        UsersXML.modifyUser(modifiedAdmin);
         return true;
     }
 

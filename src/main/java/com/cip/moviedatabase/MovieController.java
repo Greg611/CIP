@@ -70,6 +70,13 @@ public class MovieController {
         return admin.adminReadAllCastMember();
     }
 
+    @GetMapping
+    @RequestMapping("listAllAdmin")
+    public List<Admin> getAllAdmin(@RequestBody String adminId){
+        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
+        return admin.adminGetAllAdmins();
+    }
+
     @PostMapping
     @RequestMapping("newAdmin")
     public Boolean postNewAdmin(@RequestBody UUID adminId, @RequestBody Admin newAdmin){

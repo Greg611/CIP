@@ -25,24 +25,25 @@ import java.util.List;
 import java.util.UUID;
 
 public class AdminXML {
-    public static List<Admin> readAllAdmin() {
+    public static LinkedList<Admin> readAllAdmin() {
         Document doc = XMLFileBuilder.usersFileBuilder();
-        List<Admin> listOfAdmin = new LinkedList<>();
-        NodeList adminNodes = doc.getElementsByTagName("Admin");
+        LinkedList<Admin> listOfAdmin = new LinkedList<>();
+        NodeList adminNodes = doc.getElementsByTagName("User");
         for (int i = 0; i < adminNodes.getLength(); i++) {
             Node adminNode = adminNodes.item(i);
 
             if (adminNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element adminElement = (Element) adminNode;
+                if(adminElement.getAttribute("auth_level").equals("Admin")){
+                    UUID id = UUID.fromString(adminElement.getElementsByTagName("Id").item(0).getTextContent());
+                    String name = adminElement.getElementsByTagName("Name").item(0).getTextContent();
+                    String password = adminElement.getElementsByTagName("Password").item(0).getTextContent();
+                    LocalDate dob = LocalDate.parse(adminElement.getElementsByTagName("DateOfBirth").item(0).getTextContent());
+                    String email = adminElement.getElementsByTagName("Email").item(0).getTextContent();
 
-                UUID id = UUID.fromString(adminElement.getElementsByTagName("Id").item(0).getTextContent());
-                String name = adminElement.getElementsByTagName("Name").item(0).getTextContent();
-                String password = adminElement.getElementsByTagName("Password").item(0).getTextContent();
-                LocalDate dob = LocalDate.parse(adminElement.getElementsByTagName("DateOfBirth").item(0).getTextContent());
-                String email = adminElement.getElementsByTagName("Email").item(0).getTextContent();
-
-                Admin admin = new Admin(id, name, password, dob, email);
-                listOfAdmin.add(admin);
+                    Admin admin = new Admin(id, name, password, dob, email);
+                    listOfAdmin.add(admin);
+                }
             }
         }
         return listOfAdmin;
@@ -51,7 +52,7 @@ public class AdminXML {
     public static Admin readAdmin(UUID searchedId) {
         Document doc = XMLFileBuilder.usersFileBuilder();
         Admin admin = new Admin();
-        NodeList adminNodes = doc.getElementsByTagName("Admin");
+        NodeList adminNodes = doc.getElementsByTagName("User");
 
         int i = 0;
         while (i < adminNodes.getLength()) {
@@ -61,7 +62,7 @@ public class AdminXML {
                 Element adminElement = (Element) adminNode;
 
                 UUID id = UUID.fromString(adminElement.getElementsByTagName("Id").item(0).getTextContent());
-                if(id.equals(searchedId)) {
+                if(id.equals(searchedId) && adminElement.getAttribute("auth_level").equals("Admin")) {
                     String name = adminElement.getElementsByTagName("Name").item(0).getTextContent();
                     String password = adminElement.getElementsByTagName("Password").item(0).getTextContent();
                     LocalDate dob = LocalDate.parse(adminElement.getElementsByTagName("DateOfBirth").item(0).getTextContent());
@@ -83,7 +84,8 @@ public class AdminXML {
 
             Element root = doc.getDocumentElement();
 
-            Element admin = doc.createElement("Admin");
+            Element admin = doc.createElement("User");
+            admin.setAttribute("auth_level", "Admin");
 
             Element id = doc.createElement("Id");
             id.appendChild(doc.createTextNode(UUID.randomUUID().toString()));
@@ -127,7 +129,7 @@ public class AdminXML {
             Document doc = builder.parse(file);
 
             int i = 0;
-            NodeList adminNodes = doc.getElementsByTagName("Admin");
+            NodeList adminNodes = doc.getElementsByTagName("User");
 
             while (i < adminNodes.getLength()) {
                 Node adminNode = adminNodes.item(i);
@@ -136,7 +138,7 @@ public class AdminXML {
                     Element adminElement = (Element) adminNode;
 
                     UUID id = UUID.fromString(adminElement.getElementsByTagName("Id").item(0).getTextContent());
-                    if (id.equals(modifiedAdmin.getId())) {
+                    if (id.equals(modifiedAdmin.getId()) && adminElement.getAttribute("auth_level").equals("Admin")) {
                         adminElement.getElementsByTagName("Name").item(0).setTextContent(modifiedAdmin.getName());
                         adminElement.getElementsByTagName("Password").item(0).setTextContent(modifiedAdmin.getPassword());
                         adminElement.getElementsByTagName("DateOfBirth").item(0).setTextContent(modifiedAdmin.getDob().toString());
@@ -162,7 +164,7 @@ public class AdminXML {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
-            NodeList adminNodes = doc.getElementsByTagName("Admin");
+            NodeList adminNodes = doc.getElementsByTagName("User");
 
             for (int i = 0; i < deletedAdmin.getCollections().size(); i++) {
                 CollectionsXML.deleteCollection(deletedAdmin.getCollections().get(i));
