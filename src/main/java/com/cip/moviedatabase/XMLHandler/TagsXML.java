@@ -93,7 +93,7 @@ public class TagsXML {
         }
     }
 
-    public static void modifyUser(Tags modifiedTag){
+    public static void modifyTag(Tags modifiedTag){
         try {
             File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/TagsData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

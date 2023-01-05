@@ -1,8 +1,6 @@
 package com.cip.moviedatabase.Model;
 
-import com.cip.moviedatabase.XMLHandler.AdminXML;
-import com.cip.moviedatabase.XMLHandler.MoviesXML;
-import com.cip.moviedatabase.XMLHandler.UsersXML;
+import com.cip.moviedatabase.XMLHandler.*;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -20,41 +18,81 @@ public class Admin extends User{
     public Admin() {
     }
 
-    public void deleteUser(User deletedUser){
+    public Boolean adminDeleteUser(User deletedUser){
         UsersXML.deleteUser(deletedUser);
+        return true;
     }
 
-    public void modifyUser(User modifiedUser){
+    public Boolean adminModifyUser(User modifiedUser){
         UsersXML.modifyUser(modifiedUser);
+        return true;
     }
 
-    public LinkedList<User> getAllUsers(){
+    public LinkedList<User> adminGetAllUsers(){
         return UsersXML.readAllUsers();
     }
 
-    public User getUser(UUID userId) {
+    public User adminGetUser(UUID userId) {
         return UsersXML.readUser(userId);
     }
 
-    public void createAdmin(Admin newAdmin){
+    public Boolean adminCreateAdmin(Admin newAdmin){
         AdminXML.saveAdmin(newAdmin);
+        return true;
     }
 
-    public void deleteAdmin(Admin deletedAdmin){
+    public Boolean adminDeleteAdmin(Admin deletedAdmin){
         AdminXML.deleteAdmin(deletedAdmin);
+        return true;
     }
 
-    public void modifyAdmin(Admin modifiedAdmin){
+    public Boolean adminModifyAdmin(Admin modifiedAdmin){
         AdminXML.modifyAdmin(modifiedAdmin);
+        return true;
     }
 
-    public void createMovie(Movie newMovie){
+    public Boolean adminCreateMovie(Movie newMovie){
         MoviesXML.saveMovie(newMovie);
+        return true;
     }
 
-    public void deleteMovie(Movie deletedMovie){
+    public Boolean adminDeleteMovie(Movie deletedMovie){
         MoviesXML.deleteMovie(deletedMovie);
+        return true;
     }
 
-    public void modifyMovie(Movie modifiedMovie){ MoviesXML.modifyMovie(modifiedMovie); }
+    public Boolean adminModifyMovie(Movie modifiedMovie){
+        MoviesXML.modifyMovie(modifiedMovie);
+        return true;
+    }
+
+    public Boolean adminCreateTag(Tags newTag){
+        TagsXML.saveTag(newTag);
+        return true;
+    }
+
+    public Boolean adminDeleteTag(Tags deletedTag){
+        TagsXML.deleteTag(deletedTag);
+        return true;
+    }
+
+    public Boolean adminModifyTag(Tags modifiedTag){
+        TagsXML.modifyTag(modifiedTag);
+        return true;
+    }
+
+    public Boolean adminCreateCastMember(CastMember newCastMember){
+        CastMemberXML.saveCastMember(newCastMember);
+        return true;
+    }
+
+    public Boolean adminDeleteCastMember(CastMember deletedCastMember){
+        CastMemberXML.deleteCastMember(deletedCastMember);
+        return true;
+    }
+
+    public Boolean adminModifyCastMember(CastMember modifiedCastMember){
+        CastMemberXML.modifyCastMember(modifiedCastMember);
+        return true;
+    }
 }

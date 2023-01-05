@@ -74,7 +74,7 @@ public class UsersXML {
         return user;
     }
 
-    public static void saveUser(User newUser){
+    public static Boolean saveUser(User newUser){
         try {
             File file = new File("src/main/java/com/cip/moviedatabase/XMLHandler/UsersData.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -120,7 +120,7 @@ public class UsersXML {
             StreamResult streamResult = new StreamResult(file);
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(domSource, streamResult);
-
+            return true;
         } catch (ParserConfigurationException | IOException | TransformerException | SAXException e) {
             throw new RuntimeException(e);
         }

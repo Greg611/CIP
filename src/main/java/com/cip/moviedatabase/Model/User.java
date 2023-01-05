@@ -87,13 +87,15 @@ public class User {
         return UsersXML.readUser(this.id);
     }
 
-    public void userCreateCollection(String name){
+    public Boolean userCreateCollection(String name){
         Collection newCollection = new Collection(name, this.id);
         CollectionsXML.saveCollection(newCollection);
+        return true;
     }
 
-    public void userDeleteCollection(UUID collectionId){
+    public Boolean userDeleteCollection(UUID collectionId){
         CollectionsXML.deleteCollection(CollectionsXML.readCollection(collectionId, this.id));
+        return true;
     }
 
     public Boolean userAddMovieToCollection(UUID collectionId, UUID movieId){
@@ -129,5 +131,9 @@ public class User {
         collection.setName(newName);
         CollectionsXML.modifyCollection(collection);
         return true;
+    }
+
+    public Collection userGetCollection(UUID collectionId){
+        return CollectionsXML.readCollection(collectionId, this.id);
     }
 }
