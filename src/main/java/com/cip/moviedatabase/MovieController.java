@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -44,10 +45,19 @@ public class MovieController {
 
     @GetMapping
     @RequestMapping("getCollection")
-    public Collection getCollection(@RequestBody String userId, @RequestBody String collectionId){
-        User user = UsersXML.readUser(UUID.fromString(userId));
-        return user.userGetCollection(UUID.fromString(collectionId));
+    public Collection getCollection(@RequestBody Map<String,String> ids){
+        User user = UsersXML.readUser(UUID.fromString(ids.get("userId")));
+        return user.userGetCollection(UUID.fromString(ids.get("collectionId")));
     }
+
+    /*
+     {
+        "ids": {
+        "userId": "valami",
+        "collectionId": "valami2"
+        }
+      }
+    */
 
     @GetMapping
     @RequestMapping("getUser")

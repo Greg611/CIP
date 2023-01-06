@@ -49,8 +49,8 @@ public class MoviesXML {
                     cast.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Cast").item(j).getTextContent())));
                 }
                 LinkedList<Tags> tags = new LinkedList<>();
-                for (int j= 0; j<movieElement.getElementsByTagName("Tags").getLength();j++){
-                    tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tags").item(j).getTextContent())));
+                for (int j= 0; j<movieElement.getElementsByTagName("Tag").getLength();j++){
+                    tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tag").item(j).getTextContent())));
                 }
 
                 Movie movie = new Movie(id,title,imdb,duration,releaseDate,director,cast,tags);
@@ -87,8 +87,8 @@ public class MoviesXML {
                         cast.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Cast").item(j).getTextContent())));
                     }
                     LinkedList<Tags> tags = new LinkedList<>();
-                    for (int j= 0; j<movieElement.getElementsByTagName("Tags").getLength();j++){
-                        tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tags").item(j).getTextContent())));
+                    for (int j= 0; j<movieElement.getElementsByTagName("Tag").getLength();j++){
+                        tags.add(TagsXML.readTag(UUID.fromString(movieElement.getElementsByTagName("Tag").item(j).getTextContent())));
                     }
 
                     movie = new Movie(id,title,imdb,duration,releaseDate,director,cast,tags);
