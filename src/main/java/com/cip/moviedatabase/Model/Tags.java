@@ -11,6 +11,10 @@ public class Tags {
         this.name = name;
     }
 
+    public Tags(String name){
+        this.name = name;
+    }
+
     public Tags() {
     }
 

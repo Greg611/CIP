@@ -18,9 +18,7 @@ import java.util.UUID;
 @RequestMapping(path="api/movie")
 public class MovieController {
 
-    Service service = new Service();
-
-    @GetMapping
+    @PostMapping
     @RequestMapping("getMovie")
     public Movie getMovie(@RequestBody String movieId){
         return MoviesXML.readMovie(UUID.fromString(movieId));
@@ -29,19 +27,17 @@ public class MovieController {
     @GetMapping
     @RequestMapping("listAllMovies")
     public List<Movie> getAllMovies(){
-        System.out.println(UUID.randomUUID());
-        System.out.println(UUID.randomUUID());
         return MoviesXML.readAllMovies();
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("listAllUsers")
     public List<User> getAllUser(@RequestBody String adminId){
         Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
         return admin.adminGetAllUsers();
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("listCollections")
     public LinkedList<Collection> getUsersCollection(@RequestBody String userId) {
         User user = UsersXML.readUser(UUID.fromString(userId));
@@ -50,33 +46,33 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping("getCollection")
-    public Collection getCollection(@RequestBody ObjectNode ids){
-        User user = UsersXML.readUser(UUID.fromString(ids.get("userId").asText()));
-        return user.userGetCollection(UUID.fromString(ids.get("collectionId").asText()));
+    public Collection getCollection(@RequestBody Map<String, String> ids){
+        User user = UsersXML.readUser(UUID.fromString(ids.get("userId")));
+        return user.userGetCollection(UUID.fromString(ids.get("collectionId")));
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("getUser")
     public User getUser(@RequestBody String adminId, @RequestBody String userId){
         Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
         return admin.adminGetUser(UUID.fromString(userId));
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("listTags")
     public LinkedList<Tags> getTags(@RequestBody String adminId){
         Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
         return admin.adminReadAllTags();
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("listCastMember")
     public LinkedList<CastMember> getCastMember(@RequestBody String adminId){
         Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
         return admin.adminReadAllCastMember();
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("listAllAdmin")
     public List<Admin> getAllAdmin(@RequestBody String adminId){
         Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
@@ -85,9 +81,9 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping("newAdmin")
-    public Boolean postNewAdmin(@RequestBody Map<String,String> o){
-        Boolean result = service.newAdmin(o);
-        return result;
+    public Boolean postNewAdmin(@RequestBody Map<String,String> request){
+        Boolean response = Service.newAdmin(request);
+        return response;
     }
 
     @PostMapping
@@ -112,37 +108,37 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping("modifyUser")
-    public Boolean postModifyUser(@RequestBody UUID adminId, @RequestBody User modifiedUser){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminModifyUser(modifiedUser);
+    public Boolean postModifyUser(@RequestBody Map<String, String> request){
+        Boolean response = Service.modifyUser(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("deleteUser")
-    public Boolean postDeleteUser(@RequestBody UUID adminId, @RequestBody User deletedUser){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminDeleteUser(deletedUser);
+    public Boolean postDeleteUser(@RequestBody Map<String, String> request){
+        Boolean response = Service.deleteUser(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("newMovie")
-    public Boolean postNewMovie(@RequestBody UUID adminId, @RequestBody Movie newMovie){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminCreateMovie(newMovie);
+    public Boolean postNewMovie(@RequestBody Map<String, String> request){
+        Boolean response = Service.newMovie(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("modifyMovie")
-    public Boolean postModifyMovie(@RequestBody UUID adminId, @RequestBody Movie modifiedMovie){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminModifyMovie(modifiedMovie);
+    public Boolean postModifyMovie(@RequestBody Map<String, String> request){
+        Boolean response = Service.modifyMovie(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("deleteMovie")
-    public Boolean postDeleteMovie(@RequestBody UUID adminId, @RequestBody Movie deletedMovie){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminDeleteMovie(deletedMovie);
+    public Boolean postDeleteMovie(@RequestBody Map<String, String> request){
+        Boolean response = Service.deleteMovie(request);
+        return response;
     }
 
 
@@ -183,44 +179,44 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping("newTag")
-    public Boolean postNewTag(@RequestBody String adminId, @RequestBody Tags newTag){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminCreateTag(newTag);
+    public Boolean postNewTag(@RequestBody Map<String, String> request){
+        Boolean response = Service.newTag(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("deleteTag")
-    public Boolean postDeleteTag(@RequestBody String adminId, @RequestBody Tags deletedTag){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminDeleteTag(deletedTag);
+    public Boolean postDeleteTag(@RequestBody Map<String, String> request){
+        Boolean response = Service.deleteTag(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("modifyTag")
-    public Boolean postModifyTag(@RequestBody String adminId, @RequestBody Tags modifiedTag){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminModifyTag(modifiedTag);
+    public Boolean postModifyTag(@RequestBody Map<String, String> request){
+        Boolean response = Service.modifyTag(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("newCastMember")
-    public Boolean postNewCastMember(@RequestBody String adminId, @RequestBody CastMember newCastMember){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminCreateCastMember(newCastMember);
+    public Boolean postNewCastMember(@RequestBody Map<String, String> request){
+        Boolean response = Service.newCastMember(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("deleteCastMember")
-    public Boolean postDeleteCastMember(@RequestBody String adminId, @RequestBody CastMember deletedCastMember){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminDeleteCastMember(deletedCastMember);
+    public Boolean postDeleteCastMember(@RequestBody Map<String, String> request){
+        Boolean response = Service.deleteCastMember(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("modifyCastMember")
-    public Boolean postModifyCastMember(@RequestBody String adminId, @RequestBody CastMember modifiedCastMember){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminModifyCastMember(modifiedCastMember);
+    public Boolean postModifyCastMember(@RequestBody Map<String, String> request){
+        Boolean response = Service.modifyCastMember(request);
+        return response;
     }
 
 }
