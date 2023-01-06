@@ -17,66 +17,18 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path="api/movie")
 public class MovieController {
-
-    @PostMapping
-    @RequestMapping("getMovie")
-    public Movie getMovie(@RequestBody String movieId){
-        return MoviesXML.readMovie(UUID.fromString(movieId));
-    }
-
-    @GetMapping
-    @RequestMapping("listAllMovies")
-    public List<Movie> getAllMovies(){
-        return MoviesXML.readAllMovies();
-    }
-
-    @PostMapping
-    @RequestMapping("listAllUsers")
-    public List<User> getAllUser(@RequestBody String adminId){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminGetAllUsers();
-    }
-
-    @PostMapping
-    @RequestMapping("listCollections")
-    public LinkedList<Collection> getUsersCollection(@RequestBody String userId) {
-        User user = UsersXML.readUser(UUID.fromString(userId));
-        return user.getCollections();
-    }
-
-    @PostMapping
-    @RequestMapping("getCollection")
-    public Collection getCollection(@RequestBody Map<String, String> ids){
-        User user = UsersXML.readUser(UUID.fromString(ids.get("userId")));
-        return user.userGetCollection(UUID.fromString(ids.get("collectionId")));
-    }
-
-    @PostMapping
-    @RequestMapping("getUser")
-    public User getUser(@RequestBody String adminId, @RequestBody String userId){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminGetUser(UUID.fromString(userId));
-    }
-
-    @PostMapping
-    @RequestMapping("listTags")
-    public LinkedList<Tags> getTags(@RequestBody String adminId){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminReadAllTags();
-    }
-
-    @PostMapping
-    @RequestMapping("listCastMember")
-    public LinkedList<CastMember> getCastMember(@RequestBody String adminId){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminReadAllCastMember();
-    }
-
     @PostMapping
     @RequestMapping("listAllAdmin")
-    public List<Admin> getAllAdmin(@RequestBody String adminId){
-        Admin admin = AdminXML.readAdmin(UUID.fromString(adminId));
-        return admin.adminGetAllAdmins();
+    public List<Admin> getAllAdmin(@RequestBody Map<String,String> request){
+        List<Admin> response = Service.listAllAdmins(request);
+        return response;
+    }
+
+    @PostMapping
+    @RequestMapping("getAdmin")
+    public Admin postAdmin(@RequestBody Map<String,String> request){
+        Admin response = Service.getAdmin(request);
+        return response;
     }
 
     @PostMapping
@@ -101,9 +53,24 @@ public class MovieController {
     }
 
     @PostMapping
+    @RequestMapping("listAllUsers")
+    public List<User> getAllUser(@RequestBody Map<String,String> request){
+        List<User> response = Service.listAllUsers(request);
+        return response;
+    }
+
+    @PostMapping
+    @RequestMapping("getUser")
+    public User getUser(@RequestBody Map<String,String> request){
+        User response = Service.getUser(request);
+        return response;
+    }
+
+    @PostMapping
     @RequestMapping("newUser")
-    public Boolean postNewUser(@RequestBody User newUser){
-        return UsersXML.saveUser(newUser);
+    public Boolean postNewUser(@RequestBody Map<String,String> request){
+        Boolean response = Service.newUser(request);
+        return response;
     }
 
     @PostMapping
@@ -117,6 +84,19 @@ public class MovieController {
     @RequestMapping("deleteUser")
     public Boolean postDeleteUser(@RequestBody Map<String, String> request){
         Boolean response = Service.deleteUser(request);
+        return response;
+    }
+
+    @GetMapping
+    @RequestMapping("listAllMovies")
+    public List<Movie> getAllMovies(){
+        return MoviesXML.readAllMovies();
+    }
+
+    @PostMapping
+    @RequestMapping("getMovie")
+    public Movie getMovie(@RequestBody Map<String,String> request){
+        Movie response = Service.getMovie(request);
         return response;
     }
 
@@ -141,40 +121,60 @@ public class MovieController {
         return response;
     }
 
+    @PostMapping
+    @RequestMapping("listCollections")
+    public LinkedList<Collection> getUsersCollection(@RequestBody Map<String,String> request) {
+        LinkedList<Collection> response = Service.listCollections(request);
+        return response;
+    }
+
+    @PostMapping
+    @RequestMapping("getCollection")
+    public Collection getCollection(@RequestBody Map<String, String> request){
+        Collection response = Service.getCollection(request);
+        return response;
+    }
 
     @PostMapping
     @RequestMapping("newCollection")
-    public Boolean postNewCollection(@RequestBody UUID userId, @RequestBody String newCollectionName){
-        User user = UsersXML.readUser(userId);
-        return user.userCreateCollection(newCollectionName);
+    public Boolean postNewCollection(@RequestBody Map<String,String> request){
+        Boolean response = Service.newCollection(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("modifyCollectionName")
-    public Boolean postModifyCollectionName(@RequestBody UUID userId, @RequestBody String newCollectionName, @RequestBody UUID collectionID){
-        User user = UsersXML.readUser(userId);
-        return user.userChangeCollectionName(collectionID,newCollectionName);
+    public Boolean postModifyCollectionName(@RequestBody Map<String,String> request){
+        Boolean response = Service.modifyCollectionName(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("addMovieToCollection")
-    public Boolean postAddMovieToCollection(@RequestBody UUID userId, @RequestBody UUID collectionId, @RequestBody UUID movieId){
-        User user = UsersXML.readUser(userId);
-        return user.userAddMovieToCollection(collectionId, movieId);
+    public Boolean postAddMovieToCollection(@RequestBody Map<String,String> request){
+        Boolean response = Service.addMovieToCollection(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("deleteMovieFromCollection")
-    public Boolean postDeleteMovieFromCollection(@RequestBody UUID userId, @RequestBody UUID collectionId, @RequestBody UUID movieId){
-        User user = UsersXML.readUser(userId);
-        return user.userDeleteMovieFromCollection(collectionId, movieId);
+    public Boolean postDeleteMovieFromCollection(@RequestBody Map<String,String> request){
+        Boolean response = Service.removeMovieFromCollection(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("deleteCollection")
-    public Boolean postDeleteCollection(@RequestBody UUID userId, @RequestBody UUID collectionId){
-        User user = UsersXML.readUser(userId);
-        return user.userDeleteCollection(collectionId);
+    public Boolean postDeleteCollection(@RequestBody Map<String,String> request){
+        Boolean response = Service.deleteCollection(request);
+        return response;
+    }
+
+    @PostMapping
+    @RequestMapping("listTags")
+    public LinkedList<Tags> getTags(@RequestBody Map<String,String> request){
+        LinkedList<Tags> response = Service.listTags(request);
+        return response;
     }
 
     @PostMapping
@@ -195,6 +195,13 @@ public class MovieController {
     @RequestMapping("modifyTag")
     public Boolean postModifyTag(@RequestBody Map<String, String> request){
         Boolean response = Service.modifyTag(request);
+        return response;
+    }
+
+    @PostMapping
+    @RequestMapping("listCastMember")
+    public LinkedList<CastMember> getCastMember(@RequestBody Map<String,String> request){
+        LinkedList<CastMember> response = Service.listCastMembers(request);
         return response;
     }
 

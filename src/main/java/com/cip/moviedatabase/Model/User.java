@@ -72,7 +72,7 @@ public class User {
     }
 
     public LinkedList<Collection> getCollections() {
-        return collections;
+        return CollectionsXML.readUserAllCollection(this.id);
     }
 
     public Movie readMovie(UUID id){

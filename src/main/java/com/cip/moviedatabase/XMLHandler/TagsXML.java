@@ -72,6 +72,8 @@ public class TagsXML {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
 
+            Element root = doc.getDocumentElement();
+
             Element tag = doc.createElement("Tag");
 
             Element id = doc.createElement("Id");
@@ -81,6 +83,8 @@ public class TagsXML {
             Element name = doc.createElement("Name");
             name.appendChild(doc.createTextNode(newTag.getName()));
             tag.appendChild(name);
+
+            root.appendChild(tag);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();

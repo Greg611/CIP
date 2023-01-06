@@ -76,6 +76,8 @@ public class CastMemberXML {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
 
+            Element root = doc.getDocumentElement();
+
             Element castMemberElement = doc.createElement("CastMember");
 
             Element id = doc.createElement("Id");
@@ -93,6 +95,8 @@ public class CastMemberXML {
             Element dob = doc.createElement("DateOfBirth");
             dob.appendChild(doc.createTextNode(castMember.getDob().toString()));
             castMemberElement.appendChild(dob);
+
+            root.appendChild(castMemberElement);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();

@@ -106,6 +106,8 @@ public class MoviesXML {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
 
+            Element root = doc.getDocumentElement();
+
             Element movie = doc.createElement("Movie");
 
             Element id = doc.createElement("Id");
@@ -145,6 +147,8 @@ public class MoviesXML {
                 cast.appendChild(doc.createTextNode(newMovie.getTags().get(i).getId().toString()));
             }
             movie.appendChild(tags);
+
+            root.appendChild(movie);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
