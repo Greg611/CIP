@@ -4,8 +4,10 @@ import com.cip.moviedatabase.Model.*;
 import com.cip.moviedatabase.XMLHandler.AdminXML;
 import com.cip.moviedatabase.XMLHandler.MoviesXML;
 import com.cip.moviedatabase.XMLHandler.UsersXML;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -43,21 +45,12 @@ public class MovieController {
         return user.getCollections();
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("getCollection")
-    public Collection getCollection(@RequestBody Map<String,String> ids){
-        User user = UsersXML.readUser(UUID.fromString(ids.get("userId")));
-        return user.userGetCollection(UUID.fromString(ids.get("collectionId")));
+    public Collection getCollection(@RequestBody ObjectNode ids){
+        User user = UsersXML.readUser(UUID.fromString(ids.get("userId").asText()));
+        return user.userGetCollection(UUID.fromString(ids.get("collectionId").asText()));
     }
-
-    /*
-     {
-        "ids": {
-        "userId": "valami",
-        "collectionId": "valami2"
-        }
-      }
-    */
 
     @GetMapping
     @RequestMapping("getUser")
@@ -89,9 +82,9 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping("newAdmin")
-    public Boolean postNewAdmin(@RequestBody UUID adminId, @RequestBody Admin newAdmin){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminCreateAdmin(newAdmin);
+    public Boolean postNewAdmin(@RequestBody newAdminRequest r){
+        Admin admin = AdminXML.readAdmin(r.adminId);
+        return admin.adminCreateAdmin(r.newAdmin);
     }
 
     @PostMapping
