@@ -1,6 +1,7 @@
 package com.cip.moviedatabase;
 
 import com.cip.moviedatabase.Model.*;
+import com.cip.moviedatabase.Service.Service;
 import com.cip.moviedatabase.XMLHandler.AdminXML;
 import com.cip.moviedatabase.XMLHandler.MoviesXML;
 import com.cip.moviedatabase.XMLHandler.UsersXML;
@@ -16,6 +17,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path="api/movie")
 public class MovieController {
+
+    Service service = new Service();
 
     @GetMapping
     @RequestMapping("getMovie")
@@ -82,13 +85,13 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping("newAdmin")
-    public Boolean postNewAdmin(@RequestBody newAdminRequest r){
-        Admin admin = AdminXML.readAdmin(r.adminId);
-        return admin.adminCreateAdmin(r.newAdmin);
+    public Boolean postNewAdmin(@RequestBody Map<String,String> o){
+        Boolean result = service.newAdmin(o);
+        return result;
     }
 
     @PostMapping
-    @RequestMapping("modifyAdmin")
+    @RequestMapping(value = "modifyAdmin")
     public Boolean postModifyAdmin(@RequestBody UUID adminId, @RequestBody Admin modifiedAdmin){
         Admin admin = AdminXML.readAdmin(adminId);
         return admin.adminModifyAdmin(modifiedAdmin);

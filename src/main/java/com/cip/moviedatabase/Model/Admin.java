@@ -16,6 +16,7 @@ public class Admin extends User{
     }
 
     public Admin() {
+        super(UUID.randomUUID(),"asd","asd",LocalDate.now(),"asd@asd");
     }
 
     public Boolean adminDeleteUser(User deletedUser){
