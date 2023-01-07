@@ -29,4 +29,10 @@ public class Tags {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString(){
+        String result ="{\n\tid: " + this.id + "\n\tname: " + this.name + "\n}";
+        return result;
+    }
 }

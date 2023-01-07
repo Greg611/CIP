@@ -130,23 +130,28 @@ public class MoviesXML {
             releaseDate.appendChild(doc.createTextNode(newMovie.getReleaseDate().toString()));
             movie.appendChild(releaseDate);
 
-            Element directors = doc.createElement("Director");
+
             for (int i=0; i<newMovie.getDirectors().size();i++){
+                Element directors = doc.createElement("Director");
                 directors.appendChild(doc.createTextNode(newMovie.getDirectors().get(i).getId().toString()));
+                movie.appendChild(directors);
             }
-            movie.appendChild(directors);
 
-            Element cast = doc.createElement("Cast");
+
+
             for (int i=0; i < newMovie.getCast().size();i++){
+                Element cast = doc.createElement("Cast");
                 cast.appendChild(doc.createTextNode(newMovie.getCast().get(i).getId().toString()));
+                movie.appendChild(cast);
             }
-            movie.appendChild(cast);
 
-            Element tags = doc.createElement("Tag");
+
             for (int i=0; i < newMovie.getTags().size();i++){
-                cast.appendChild(doc.createTextNode(newMovie.getTags().get(i).getId().toString()));
+                Element tags = doc.createElement("Tag");
+                tags.appendChild(doc.createTextNode(newMovie.getTags().get(i).getId().toString()));
+                movie.appendChild(tags);
             }
-            movie.appendChild(tags);
+
 
             root.appendChild(movie);
 

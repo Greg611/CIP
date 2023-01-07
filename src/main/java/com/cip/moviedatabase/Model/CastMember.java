@@ -52,4 +52,11 @@ public class CastMember {
     public void setDob(LocalDate dob) {
         this.dob = dob;
     }
+
+    @Override
+    public String toString(){
+        String result = "{\n\tid: " + this.id + "\n\tname: " + this.name + "\n\talias: " + this.alias + "\n\tdob: " +
+                this.dob + "\n}";
+        return result;
+    }
 }

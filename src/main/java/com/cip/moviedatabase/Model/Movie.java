@@ -97,4 +97,27 @@ public class Movie {
     public void addTags(Tags tag) {
         this.tags.add(tag);
     }
+
+    @Override
+    public String toString(){
+        String result = "{\n\tid: " + this.id + "\n\t title: " + this.title + "\n\timdb: " + this.imdb + "\n\tduration: "
+                + this.duration + "\n\treleaseDate: " + this.releaseDate + "\n\tdirectors: ";
+        String directors = "[";
+        for(int i=0;i<this.directors.size();i++){
+            directors = directors +"\t" + this.directors.get(i) + "\n";
+        }
+        directors = directors + "]";
+        String cast = "[";
+        for(int i=0;i<this.cast.size();i++){
+            cast = cast +"\t" + this.cast.get(i) + "\n";
+        }
+        cast = cast + "]";
+        String tags = "[";
+        for(int i=0;i<this.tags.size();i++){
+            tags = tags +"\t" + this.tags.get(i) + "\n";
+        }
+        tags = tags + "]";
+        result = result + directors + "\n\tcast: " + cast + "\n\ttags: " + tags + "\n}";
+        return result;
+    }
 }
