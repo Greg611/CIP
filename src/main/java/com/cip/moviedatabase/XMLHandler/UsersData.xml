@@ -1,224 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Users>
-                            
-    
-    
-    
-    
-    
-    <User>
-                                                        
-        
-        
-        
-        
-        
-        <Id>f7c0bc58-ad3e-4a84-bf38-120fa28f7f65</Id>
-                
-        <Name>Asd</Name>
-                                                        
-        
-        
-        
-        
-        
-        <Password>1111</Password>
-                                                        
-        
-        
-        
-        
-        
-        <DateOfBirth>2023-01-02</DateOfBirth>
-                                                        
-        
-        
-        
-        
-        
-        <Email>batmanus@waynetech.com</Email>
-                                                    
-    
-    
-    
-    
-    
-    </User>
-                        
-    
-    
-    
-    
-    
-    <User>
-                                                
-        
-        
-        
-        
-        <Id>8b4be928-cbf0-4ba6-b83f-fb77cc12a330</Id>
-                                                
-        
-        
-        
-        
-        <Name>asd</Name>
-                                                
-        
-        
-        
-        
-        <Password>asd</Password>
-                                                
-        
-        
-        
-        
-        <DateOfBirth>2023-01-02</DateOfBirth>
-                                                
-        
-        
-        
-        
-        <Email>asd</Email>
-                                            
-    
-    
-    
-    
-    </User>
-                        
-    
-    
-    
-    
-    <User>
-                                                
-        
-        
-        
-        
-        <Id>14166bc5-9754-4e18-a0ee-02fa76e365be</Id>
-                                                
-        
-        
-        
-        
-        <Name>asd</Name>
-                                                
-        
-        
-        
-        
-        <Password>asd</Password>
-                                                
-        
-        
-        
-        
-        <DateOfBirth>2023-01-02</DateOfBirth>
-                                                
-        
-        
-        
-        
-        <Email>asd</Email>
-                                            
-    
-    
-    
-    
-    </User>
-                    
-    
+            
     
     
     
     <User auth_level="Admin">
                 
-        <Id>396b1ecf-7372-4f5b-ba94-ba4dce9ad364</Id>
+        <Id>341e3c9d-55e2-4141-aa3a-531891ac5d54</Id>
                 
-        <Name>asd</Name>
+        <Name>Greg</Name>
                 
-        <Password>asd</Password>
+        <Password>11111</Password>
                 
-        <DateOfBirth>2023-01-02</DateOfBirth>
+        <DateOfBirth>2001-06-11</DateOfBirth>
                 
-        <Email>asd</Email>
-            
-    </User>
-                
-    
-    
-    
-    <User>
-                                
-        
-        
-        <Id>88eff407-0f5b-4023-8c42-916b7b517383</Id>
-                                
-        
-        
-        <Name>asd</Name>
-                                
-        
-        
-        <Password>asd</Password>
-                                
-        
-        
-        <DateOfBirth>2023-01-02</DateOfBirth>
-                                
-        
-        
-        <Email>asd</Email>
-                            
-    
-    
-    </User>
-            
-    
-    
-    <User>
-                        
-        
-        <Id>65ca8161-1f9c-42cc-871d-deccae1fb3db</Id>
-                        
-        
-        <Name>asd</Name>
-                        
-        
-        <Password>asd</Password>
-                        
-        
-        <DateOfBirth>2023-01-02</DateOfBirth>
-                        
-        
-        <Email>asd</Email>
-                    
-    
-    </User>
-        
-    
-    <User>
-                
-        <Id>a06c297f-521c-46a9-8a0c-90767cf4342f</Id>
-                
-        <Name>asd</Name>
-                
-        <Password>asd</Password>
-                
-        <DateOfBirth>2023-01-02</DateOfBirth>
-                
-        <Email>asd</Email>
+        <Email>varnida@gmail.com</Email>
             
     </User>
     
-    <User auth_level="Admin">
-        <Id>db309281-3cee-4648-b725-a2cef82bc7bd</Id>
-        <Name>Sanyi</Name>
+    <User>
+        <Id>b182ddf5-0d66-4ee2-b5f5-5d7de70f48d5</Id>
+        <Name>asd</Name>
         <Password>1111</Password>
-        <DateOfBirth>2023-01-06</DateOfBirth>
-        <Email>batmanus@waynetech.com</Email>
+        <DateOfBirth>2023-01-08</DateOfBirth>
+        <Email>asd</Email>
     </User>
 </Users>

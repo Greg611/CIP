@@ -35,14 +35,19 @@ public class UsersXML {
             if (userNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element userElement = (Element) userNode;
 
-                UUID id = UUID.fromString(userElement.getElementsByTagName("Id").item(0).getTextContent());
-                String name = userElement.getElementsByTagName("Name").item(0).getTextContent();
-                String password = userElement.getElementsByTagName("Password").item(0).getTextContent();
-                LocalDate dob = LocalDate.parse(userElement.getElementsByTagName("DateOfBirth").item(0).getTextContent());
-                String email = userElement.getElementsByTagName("Email").item(0).getTextContent();
+                if(userElement.getAttribute("auth_level").equals("Admin")){
 
-                User user = new User(id, name, password, dob, email);
-                listOfUsers.add(user);
+                }
+                else {
+                    UUID id = UUID.fromString(userElement.getElementsByTagName("Id").item(0).getTextContent());
+                    String name = userElement.getElementsByTagName("Name").item(0).getTextContent();
+                    String password = userElement.getElementsByTagName("Password").item(0).getTextContent();
+                    LocalDate dob = LocalDate.parse(userElement.getElementsByTagName("DateOfBirth").item(0).getTextContent());
+                    String email = userElement.getElementsByTagName("Email").item(0).getTextContent();
+
+                    User user = new User(id, name, password, dob, email);
+                    listOfUsers.add(user);
+                }
             }
         }
         return listOfUsers;

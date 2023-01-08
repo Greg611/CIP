@@ -61,7 +61,7 @@ public class MoviesXML {
     }
 
     public static Movie readMovie(UUID searchedId) {
-        Document doc = XMLFileBuilder.usersFileBuilder();
+        Document doc = XMLFileBuilder.moviesFileBuilder();
         Movie movie = new Movie();
         NodeList movieNodes = doc.getElementsByTagName("Movie");
 

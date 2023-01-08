@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Service {
-    public static List<Admin> listAllAdmins(Map<String,String> request){
+    public static LinkedList<Admin> listAllAdmins(Map<String,String> request){
         UUID adminId = UUID.fromString(request.get("adminId"));
         Admin admin = AdminXML.readAdmin(adminId);
-        List<Admin> response = admin.adminGetAllAdmins();
+        LinkedList<Admin> response = admin.adminGetAllAdmins();
         return response;
     }
 
@@ -179,6 +179,8 @@ public class Service {
 
     public static Movie getMovie(Map<String,String> request){
         UUID movieId = UUID.fromString(request.get("movieId"));
+        System.out.println(request.get("movieId"));
+        System.out.println(UUID.fromString(request.get("movieId")));
         Movie response = MoviesXML.readMovie(movieId);
         return response;
     }

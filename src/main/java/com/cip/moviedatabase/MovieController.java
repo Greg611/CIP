@@ -14,8 +14,8 @@ import java.util.Map;
 public class MovieController {
     @PostMapping
     @RequestMapping("listAllAdmin")
-    public List<Admin> getAllAdmin(@RequestBody Map<String,String> request){
-        List<Admin> response = Service.listAllAdmins(request);
+    public LinkedList<Admin> getAllAdmin(@RequestBody Map<String,String> request){
+        LinkedList<Admin> response = Service.listAllAdmins(request);
         return response;
     }
 

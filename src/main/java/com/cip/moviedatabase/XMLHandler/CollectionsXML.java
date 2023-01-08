@@ -98,7 +98,7 @@ public class CollectionsXML {
                     for (int j=0; i<collectionElement.getElementsByTagName("Movies").getLength();j++){
                         movies.add(MoviesXML.readMovie(UUID.fromString(collectionElement.getElementsByTagName("Movies").item(j).getTextContent())));
                     }
-                    collection = new Collection(id, name, movies);
+                    collection = new Collection(id, name,userId, movies);
                 }
                 listOfCollections.add(collection);
             }
