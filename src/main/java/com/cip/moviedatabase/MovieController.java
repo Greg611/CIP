@@ -2,17 +2,12 @@ package com.cip.moviedatabase;
 
 import com.cip.moviedatabase.Model.*;
 import com.cip.moviedatabase.Service.Service;
-import com.cip.moviedatabase.XMLHandler.AdminXML;
 import com.cip.moviedatabase.XMLHandler.MoviesXML;
-import com.cip.moviedatabase.XMLHandler.UsersXML;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(path="api/movie")
@@ -40,16 +35,16 @@ public class MovieController {
 
     @PostMapping
     @RequestMapping(value = "modifyAdmin")
-    public Boolean postModifyAdmin(@RequestBody UUID adminId, @RequestBody Admin modifiedAdmin){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminModifyAdmin(modifiedAdmin);
+    public Boolean postModifyAdmin(@RequestBody Map<String,String> request){
+        Boolean response = Service.modifyAdmin(request);
+        return response;
     }
 
     @PostMapping
     @RequestMapping("deleteAdmin")
-    public Boolean postDeleteAdmin(@RequestBody UUID adminId, @RequestBody Admin deletedAdmin){
-        Admin admin = AdminXML.readAdmin(adminId);
-        return admin.adminDeleteAdmin(deletedAdmin);
+    public Boolean postDeleteAdmin(@RequestBody Map<String,String> request){
+        Boolean response = Service.deleteAdmin(request);
+        return response;
     }
 
     @PostMapping
