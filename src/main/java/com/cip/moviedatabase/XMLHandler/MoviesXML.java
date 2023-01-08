@@ -77,7 +77,7 @@ public class MoviesXML {
                     String title = movieElement.getElementsByTagName("Title").item(0).getTextContent();
                     Float imdb = Float.parseFloat(movieElement.getElementsByTagName("IMDB").item(0).getTextContent());
                     Integer duration = Integer.parseInt(movieElement.getElementsByTagName("Duration").item(0).getTextContent());
-                    LocalDate releaseDate = LocalDate.parse(movieElement.getElementsByTagName("releaseDate").item(0).getTextContent());
+                    LocalDate releaseDate = LocalDate.parse(movieElement.getElementsByTagName("ReleaseDate").item(0).getTextContent());
                     LinkedList<CastMember> director = new LinkedList<>();
                     for (int j= 0; j<movieElement.getElementsByTagName("Director").getLength();j++){
                         director.add(CastMemberXML.readCastMember(UUID.fromString(movieElement.getElementsByTagName("Director").item(j).getTextContent())));
